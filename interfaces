@@ -1,0 +1,58 @@
+allow-hotplug aggi
+auto aggi
+iface aggi inet static
+address 10.40.2.28
+netmask 255.255.255.248
+hwaddress ether 0c:c4:7a:85:79:b6
+mtu 8964
+slaves int1 int2
+bond_mode 4
+bond_miimon 100
+bond_downdelay 200
+bond_updelay 200
+bond_lacp_rate slow
+bond_xmit_hash_policy layer3+4
+post-up /sbin/ethtool -K aggi tx off tso off
+ 
+allow-hotplug agge
+auto agge
+iface agge inet static
+hwaddress ether 0c:c4:7a:85:79:b7
+address 188.42.128.228
+netmask 255.255.255.248
+gateway 188.42.128.227
+slaves ext1 ext2
+bond_mode 4
+bond_miimon 100
+bond_downdelay 200
+bond_updelay 200
+bond_lacp_rate slow
+bond_xmit_hash_policy layer3+4
+post-up /sbin/ethtool -K agge tx off tso off
+ 
+up route add -net 10.0.0.0/8 gw 10.40.2.27 dev aggi
+up route add -net 192.168.0.0/16 gw 10.40.2.27 dev aggi
+up route add -net 188.42.208.0/21 gw 10.40.2.27 dev aggi
+ 
+allow-hotplug int1
+auto int1
+iface int1 inet manual
+bond-master aggi
+ 
+allow-hotplug int2
+auto int2
+iface int2 inet manual
+bond-master aggi
+ 
+allow-hotplug ext1
+auto ext1
+iface ext1 inet manual
+bond-master agge
+ 
+allow-hotplug ext2
+auto ext2
+iface ext2 inet manual
+bond-master agge
+ 
+auto lo
+iface lo inet loopback

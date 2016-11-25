@@ -1,0 +1,5 @@
+SUBSYSTEM=="net",ACTION=="add",DRIVERS=="?*",ATTR{address}=="0c:c4:7a:85:79:b6",ATTR{type}=="1",KERNEL=="e*",NAME="int1"
+SUBSYSTEM=="net",ACTION=="add",DRIVERS=="?*",ATTR{address}=="00:15:17:a9:fc:88",ATTR{type}=="1",KERNEL=="e*",NAME="int2"
+SUBSYSTEM=="net",ACTION=="add",DRIVERS=="?*",ATTR{address}=="0c:c4:7a:85:79:b7",ATTR{type}=="1",KERNEL=="e*",NAME="ext1"
+SUBSYSTEM=="net",ACTION=="add",DRIVERS=="?*",ATTR{address}=="00:15:17:a9:fc:89",ATTR{type}=="1",KERNEL=="e*",NAME="ext2"
+
